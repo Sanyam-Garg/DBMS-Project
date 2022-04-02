@@ -1,0 +1,22 @@
+.shows-container{
+    /* display: flex;
+    flex-direction: row; */
+    padding: auto;
+    width: 100%;
+    justify-content: center;
+}
+.show-card{
+    display: flex;
+    width: 70%;
+    height: 10%;
+    /* justify-content: center; */
+    margin: 10vh 10vw;
+    background-color: rgb(56, 54, 54);
+}
+
+.theatre-name{
+    font-size: 40px;
+    margin-left: 10px;
+    text-transform: capitalize;
+    color: wheat;
+}
