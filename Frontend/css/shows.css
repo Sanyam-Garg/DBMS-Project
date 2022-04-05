@@ -8,15 +8,36 @@
 .show-card{
     display: flex;
     width: 70%;
-    height: 10%;
+    /* height: 10%; */
     /* justify-content: center; */
     margin: 10vh 10vw;
+    padding: 20px 30px;
     background-color: rgb(56, 54, 54);
 }
 
 .theatre-name{
-    font-size: 40px;
+    font-size: 50px;
     margin-left: 10px;
     text-transform: capitalize;
     color: wheat;
+}
+
+.timings{
+    width: 100%;
+    display: flex;
+    align-self: flex-end;
+    justify-content: end;
+    height: 100%;
+}
+
+.btn-timings{
+    padding: 10px;
+    margin: 0 10px;
+    height: fit-content;
+    text-transform: uppercase;
+}
+
+.btn-timings:hover{
+    cursor: pointer;
+    background-color: aqua;
 }
