@@ -1,7 +1,8 @@
 const container = document.querySelector('.container');
-const seats = document.querySelectorAll('.row .seat:not(.occupied');
-const count = document.getElementById('count');
-const total = document.getElementById('total');
+// const seats = document.querySelectorAll('.row .seat:not(.occupied');
+// const count = document.getElementById('count');
+// const total = document.getElementById('total');
+const seat= document.getElementsByClassName('seat');
 
 function updateSelectedCount() {
     const selectedSeats = document.querySelectorAll('.row .seat.selected');
@@ -19,10 +20,13 @@ function updateSelectedCount() {
     count.innerText = selectedSeatsCount;
     // total.innerText = selectedSeatsCount * ticketPrice;
   }
-container.addEventListener('click', (e) => {
-    if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
+seat.addEventListener('click', (e) => {
+    // if (e.target.classList.contains('seat') 
+    // && !e.target.classList.contains('occupied')
+    // ) {
+      console.log("H");
       e.target.classList.toggle('selected');
   
-      updateSelectedCount();
-    }
+      // updateSelectedCount();
+    // }
   });

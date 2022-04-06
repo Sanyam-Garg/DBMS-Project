@@ -25,7 +25,7 @@
             <div class="timings">
                 <%shows['shows'].forEach(item => {
                     %>
-                    <button type="submit" class="btn-timings"><p><%=item['start_time']%></p></button>
+                        <a href="/movies/<%=item['id']%>/<%=item['showId']%>"><button type="submit" class="btn-timings"><p><%=item['start_time']%></p></button>
                     <%
                 })%>
             </div>
