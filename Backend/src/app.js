@@ -1,9 +1,15 @@
 const express = require('express');
+const path = require('path');
 const app = express()
 const db = require('./db')
 const port = 3000
 
+const views = path.join(__dirname, "../public")
 app.use(express.json())
+app.set('view engine', 'ejs')
+app.set('views', views)
+
+app.use(express.static(views))
 
 // Get all movies in the database
 app.get('/movies', (req, res) => {
@@ -11,7 +17,7 @@ app.get('/movies', (req, res) => {
         if(err)
             return res.send(err)
         
-        res.send(result)
+        res.render('index', {movies: result})
     })
 })
 
@@ -25,7 +31,9 @@ app.get('/movies/:id', (req, res) => {
                 shows,
                 ...movieTitle
             }
-            res.send(response)
+
+            console.log(response)
+            res.render('shows', {shows: response})
         })
     })
 })
