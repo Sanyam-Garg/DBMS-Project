@@ -47,13 +47,15 @@ app.get('/movies/:id/:showId', (req, res) => {
 
 // Book a ticket and block it for 1 minute
 app.post('/movies/:id/:showId/', (req, res) => {
-    const ticket = req.body['ticket']
-    db.query(`UPDATE tickets SET availability=0 WHERE showId=${req.params.showId} AND seat_number='${ticket}'`, (err, result) => {
-        if(err)
-            return res.send(err)
-        
-        res.send({"success": 'Ticket booked successfully!'})
-    })
+    const tickets = req.body['tickets']
+    for(let i = 0; i < tickets.length; i++){
+        db.query(`UPDATE tickets SET availability=0 WHERE showId=${req.params.showId} AND seat_number='${tickets[i]}'`, (err, result) => {
+            if(err)
+                return res.send(err)
+            
+            res.send({"success": 'Ticket booked successfully!'})
+        })
+    }
 })
 
 // Show booked tickets

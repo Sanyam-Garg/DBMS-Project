@@ -35,75 +35,6 @@
               <small>Occupied</small>
             </li>
         </ul>
-      
-        <!-- <div class="container">
-            <div class="screen"></div>
-            <div class="row">
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-            </div>
-            <div class="row">
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat occupied"></div>
-              <div class="seat occupied"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-            </div>
-      
-            <div class="row">
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat occupied"></div>
-              <div class="seat occupied"></div>
-            </div>
-      
-            <div class="row">
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-            </div>
-      
-            <div class="row">
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat occupied"></div>
-              <div class="seat occupied"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-            </div>
-      
-            <div class="row">
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat"></div>
-              <div class="seat occupied"></div>
-              <div class="seat occupied"></div>
-              <div class="seat occupied"></div>
-              <div class="seat"></div>
-            </div>
-        </div> -->
-          
         <div class="container">
 
               <% 
@@ -122,9 +53,24 @@
         <p class="text">
             You have selected <span id="count">0</span> seats for a price of $<span id="total">0</span>
         </p>
-        <a href=""></a><button>Book Now</button></a>
+        <button onclick="handleClick()">Book Now</button>
     </div>
 
     <script src="/js/seats.js"></script>
+    <script>
+      const handleClick = () => {
+        const movieId = window.location.pathname.slice(8, 9)
+        const showId = window.location.pathname.slice(10)
+          fetch(`/movies/${movieId}/${showId}`, {
+              method: "POST",
+              body: JSON.stringify({
+                  tickets: selectSeats
+              }),
+              headers: {
+                  "Content-type": "application/json; charset=UTF-8"
+              }
+          })
+      }
+    </script>
 </body>
 </html>
