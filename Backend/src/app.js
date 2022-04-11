@@ -41,7 +41,6 @@ app.get('/movies/:id/:showId', (req, res) => {
     db.query(`SELECT * FROM tickets WHERE showId=${req.params.showId} AND availability=1`, (err, tickets) => {
         if(err)
             return res.send(err)
-        console.log(tickets)
         res.render('seats', {tickets})
     })
 })

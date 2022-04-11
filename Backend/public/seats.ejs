@@ -106,14 +106,17 @@
           
         <div class="container">
 
-              <% tickets.forEach((item) => {
-              %>
-              <div class="seat">
-                  
-                      <h3 class="seat-number"><%=item['seat_number']%></h3>
-              </div>
-                      <p class="seat-class"><%=item['class']%></p>
+              <% 
+                var i = 0
+              tickets.forEach((item) => {
+                %>
+                <div id="<%=`seat${i}`%>" class="seat">
+                    
+                        <h3 class="seat-number"><%=item['seat_number']%></h3>
+                </div>
+                        <p class="seat-class"><%=item['class']%></p>
               <%
+              i++
           }) %>
         </div>
         <p class="text">
