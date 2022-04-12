@@ -3,6 +3,7 @@
 }
   
 .movie-container {
+    height: 100%;
     background-color: #dddce4;
     display: flex;
     flex-direction: column;
@@ -26,16 +27,27 @@
 
 .container {
     perspective: 1000px;
-    margin-bottom: 30px;
+    margin: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
-
+.cos{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
 .seat {
     background-color: #444451;
     height: 20px;
     width: 30px;
-    margin: 3px;
+    /* margin: 3px; */
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    display: flex;
+    justify-content: center;
   }
   
 .seat-number.selected {
@@ -97,7 +109,7 @@
   
   .screen {
     background-color: #fff;
-    height: 70px;
+    height: 100px;
     width: 100%;
     margin: 15px 0;
     transform: rotateX(-45deg);
@@ -105,7 +117,7 @@
   }
   
   p.text {
-    margin: 5px 0;
+    margin: 10px 5px;
   }
   
   p.text span {

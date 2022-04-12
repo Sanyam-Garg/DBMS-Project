@@ -49,11 +49,45 @@ app.get('/movies/:id/:showId', (req, res) => {
 app.post('/movies/:id/:showId/', (req, res) => {
     const tickets = req.body['tickets']
     for(let i = 0; i < tickets.length; i++){
-        db.query(`UPDATE tickets SET availability=0 WHERE showId=${req.params.showId} AND seat_number='${tickets[i]}'`, (err, result) => {
+        // db.query(
+        //     `UPDATE tickets SET availability=0 WHERE showId=${req.params.showId} AND seat_number='${tickets[i]}'`
+        //     // `SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;BEGIN TRANSACTION ;UPDATE tickets SET availability=0 WHERE showId=${req.params.showId} AND seat_number='${tickets[i]}'; COMMIT TRANSACTION ;`
+        // , (err, result) => {
+        //     if(err)
+        //         return res.send(err)
+        //     console.log("Success");
+        //     res.send({"success": 'Ticket booked successfully!'})
+        //     // res.redirect("/movies")
+        // })
+        db.beginTransaction((err) => {
             if(err)
                 return res.send(err)
-            
-            res.send({"success": 'Ticket booked successfully!'})
+        
+            // Select the seat and check if it is available
+            db.query(`SELECT availability FROM tickets WHERE showId=${req.params.showId} AND seat_number='${tickets[i]}'`, (e, result) => {
+                if(err){
+                    db.rollback(() => {
+                        res.send({'error': 'There was an error booking your ticket.'})
+                    })
+                }
+                
+                db.query(`UPDATE tickets SET availability=0 WHERE showId=${req.params.showId} AND seat_number='${tickets[i]}'`, (e, result) => {
+                    if(err){
+                        db.rollback(() => {
+                            res.send({'error': 'There was an error booking your ticket.'})
+                        })
+                    }
+
+                    db.commit((err) => {
+                        if(err)
+                            db.rollback(() => {
+                                res.send({'error': 'There was an error booking your ticket.'})
+                            })
+                        
+                        res.send({'success': 'Ticket booked successfully'})
+                    })
+                })
+            })
         })
     }
 })
