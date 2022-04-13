@@ -4,7 +4,7 @@ const count = document.getElementById('count');
 const total = document.getElementById('total');
 // var selectSeats = new Set();
 var selectSeats =[]
-let ticketprice=0;
+let ticketprice=100;
 
 for (let i = 0; i < seats.length; i++) {
   const seat = seats[i];
