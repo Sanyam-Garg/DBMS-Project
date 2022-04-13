@@ -1,8 +1,5 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shows</title>
 
     <link rel="stylesheet" href="/css/index.css">
@@ -25,20 +22,9 @@
             <div class="timings">
                 <%shows['shows'].forEach(item => {
                     %>
-                        <a href="/movies/<%=item['id']%>/<%=item['showId']%>"><button type="submit" class="btn-timings"><p><%=item['start_time']%></p></button>
+                        <a href="/movies/<%=item['movie_id']%>/<%=item['showId']%>"><button type="submit" class="btn-timings"><p><%=item['start_time']%></p></button>
                     <%
                 })%>
-            </div>
-        </div>
-        <div class="show-card">
-            <div class="theatre-name">
-                <h3>sadasdas</h3>
-            </div>
-            <div class="timings">
-                <button type="submit" class="btn-timings"><p>6:00 pm</p></button>
-                <button type="submit" class="btn-timings"><p>6:00 pm</p></button>
-                <button type="submit" class="btn-timings"><p>6:00 pm</p></button>
-                <button type="submit" class="btn-timings"><p>6:00 pm</p></button>
             </div>
         </div>
     </div>

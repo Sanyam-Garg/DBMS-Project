@@ -23,8 +23,8 @@ app.get('/movies', (req, res) => {
 
 // Get all shows for a particular movie
 app.get('/movies/:id', (req, res) => {
-    db.query(`SELECT title FROM movie WHERE id=${req.params.id}`, (e, movieTitle) => {
-        db.query(`SELECT * FROM shows WHERE id=${req.params.id}`, (err, shows) => {
+    db.query(`SELECT title FROM movie WHERE movie_id=${req.params.id}`, (e, movieTitle) => {
+        db.query(`SELECT * FROM shows WHERE movie_id=${req.params.id}`, (err, shows) => {
             if(err)
                 return res.send(err)
             const response = {

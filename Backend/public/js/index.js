@@ -17,11 +17,11 @@ productContainers.forEach((item, i) => {
     })
 })
   
-fetch("http://localhost:3000/movies")
-.then(data => {
-    // Do some stuff here
-    data.json().then(d => arr=d)
-})
-.catch(err => {
-    // Catch and display errors
-})
+// fetch("http://localhost:3000/movies")
+// .then(data => {
+//     // Do some stuff here
+//     data.json().then(d => arr=d)
+// })
+// .catch(err => {
+//     // Catch and display errors
+// })
