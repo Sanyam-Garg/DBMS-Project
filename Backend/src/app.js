@@ -46,50 +46,45 @@ app.get('/movies/:id/:showId', (req, res) => {
 })
 
 // Book a ticket and block it for 1 minute
-app.post('/movies/:id/:showId/', (req, res) => {
+app.post('/movies/:id/:showId/book', (req, res) => {
     const tickets = req.body['tickets']
     for(let i = 0; i < tickets.length; i++){
-        // db.query(
-        //     `UPDATE tickets SET availability=0 WHERE showId=${req.params.showId} AND seat_number='${tickets[i]}'`
-        //     // `SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;BEGIN TRANSACTION ;UPDATE tickets SET availability=0 WHERE showId=${req.params.showId} AND seat_number='${tickets[i]}'; COMMIT TRANSACTION ;`
-        // , (err, result) => {
-        //     if(err)
-        //         return res.send(err)
-        //     console.log("Success");
-        //     res.send({"success": 'Ticket booked successfully!'})
-        //     // res.redirect("/movies")
-        // })
         db.beginTransaction((err) => {
             if(err)
                 return res.send(err)
         
             // Select the seat and check if it is available
             db.query(`SELECT availability FROM tickets WHERE showId=${req.params.showId} AND seat_number='${tickets[i]}'`, (e, result) => {
-                if(err){
+                if(err || result == 0){
                     db.rollback(() => {
-                        res.send({'error': 'There was an error booking your ticket.'})
+                        res.status(500).send({'error': 'error'})
                     })
                 }
                 
                 db.query(`UPDATE tickets SET availability=0 WHERE showId=${req.params.showId} AND seat_number='${tickets[i]}'`, (e, result) => {
                     if(err){
                         db.rollback(() => {
-                            res.send({'error': 'There was an error booking your ticket.'})
+                            res.status(500).send({'error': 'error'})
                         })
                     }
 
                     db.commit((err) => {
-                        if(err)
+                        if(err){
                             db.rollback(() => {
-                                res.send({'error': 'There was an error booking your ticket.'})
+                                res.status(500).send({'error': 'error'})
                             })
+                        }
                         
-                        res.send({'success': 'Ticket booked successfully'})
+                        res.send({'success': 'Tickets booked successfully'})
                     })
                 })
             })
         })
     }
+})
+
+app.get('/success', (req, res) => {
+    res.render('success')
 })
 
 // Show booked tickets
